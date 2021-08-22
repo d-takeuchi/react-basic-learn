@@ -30,7 +30,6 @@ const defaultQuestions : Question[] = [
 
 export const PageQuestion : VFC = memo(() => {
 
-
   const [questions , setQuestions] = useState<Array<Question>>(defaultQuestions);
 
   //質問の表示フラグを更新
@@ -54,15 +53,15 @@ export const PageQuestion : VFC = memo(() => {
 
       <div>
         {questions.map(question => (
-          <>
-            {question.displayFlg ? (
-              <>
-                <p>{question.text}</p>
-                <input type="radio" name={question.number.toString()} onChange={() => updateQuestionDisplayFlg(question)}/>はい
-                <input type="radio" name={question.number.toString()} onChange={() => updateQuestionDisplayFlg(question)} />いいえ
-              </>
-            ) : ""}
-          </>
+
+          question.displayFlg && (
+            <div key={question.number}>
+              <p>{question.text}</p>
+              <input type="radio" name={question.number.toString()} onChange={() => updateQuestionDisplayFlg(question)}/>はい
+              <input type="radio" name={question.number.toString()} onChange={() => updateQuestionDisplayFlg(question)} />いいえ
+            </div>
+          )
+
         ))}
       </div>
 
