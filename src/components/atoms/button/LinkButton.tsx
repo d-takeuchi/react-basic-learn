@@ -1,4 +1,5 @@
-import React, { memo, ReactNode, VFC } from 'react'
+import React, { memo, ReactNode, VFC } from 'react';
+
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
 

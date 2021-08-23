@@ -1,8 +1,8 @@
-import { memo, useState, VFC } from 'react';
+import React,{ ChangeEvent, memo, useContext, useState, VFC } from 'react';
 
+import { InputDataContext } from '../../providers/InputDataProvider';
 import { LinkButton,SButtons } from '../atoms/button/LinkButton';
 import { SContainer } from '../organisms/Header';
-
 
 type Question = {
   number : number;
@@ -32,10 +32,12 @@ export const PageQuestion : VFC = memo(() => {
 
   const [questions , setQuestions] = useState<Array<Question>>(defaultQuestions);
 
-  //質問の表示フラグを更新
-  const updateQuestionDisplayFlg = (currentQuestion : Question) => {
+  const {inputData, setInputData} = useContext(InputDataContext);
 
-    const nextQuestion = questions.find(q => q.number === currentQuestion.number + 1);
+  //質問の表示フラグを更新
+  const updateQuestionDisplayFlg = (currentQuestionNumber : number) => {
+
+    const nextQuestion = questions.find(q => q.number === currentQuestionNumber + 1);
 
     if(nextQuestion){
       nextQuestion.displayFlg = true;
@@ -44,6 +46,20 @@ export const PageQuestion : VFC = memo(() => {
     }
   }
 
+  //回答データをセット
+  const onChangeSetAnswer = (event : ChangeEvent<HTMLInputElement>) => {
+
+    updateQuestionDisplayFlg(+event.target.name);
+
+    setInputData(prevState => ({
+      ...prevState,
+      questions : {
+        ...prevState.questions,
+        [event.target.name] : event.target.value
+      }
+    }))
+
+  }
   return (
     <SContainer>
       
@@ -55,13 +71,13 @@ export const PageQuestion : VFC = memo(() => {
         {questions.map(question => (
 
           question.displayFlg && (
+
             <div key={question.number}>
               <p>{question.text}</p>
-              <input type="radio" name={question.number.toString()} onChange={() => updateQuestionDisplayFlg(question)}/>はい
-              <input type="radio" name={question.number.toString()} onChange={() => updateQuestionDisplayFlg(question)} />いいえ
+              <input type="radio" name={question.number.toString()} onChange={onChangeSetAnswer} value="はい" checked={inputData.questions[question.number] === "はい"}/>はい
+              <input type="radio" name={question.number.toString()} onChange={onChangeSetAnswer} value="いいえ" checked={inputData.questions[question.number] === "いいえ"}/>いいえ
             </div>
           )
-
         ))}
       </div>
 
