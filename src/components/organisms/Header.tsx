@@ -1,7 +1,7 @@
-import React, { memo, VFC } from 'react';
-import styled from 'styled-components';
+import React, { memo, VFC } from "react";
+import styled from "styled-components";
 
-export const Header:VFC = memo(() => {
+export const Header: VFC = memo(() => {
   return (
     <SContainer>
       <SHeader>
@@ -15,23 +15,23 @@ export const Header:VFC = memo(() => {
         </SHeaderNav>
       </SHeader>
     </SContainer>
-  )
+  );
 });
 
 export const SContainer = styled.div`
   max-width: 1200px;
-  margin : 0 auto;
-`
+  margin: 0 auto;
+`;
 const SHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
+`;
 const SHeaderNav = styled.nav`
-  ul{
+  ul {
     display: flex;
-    li{
+    li {
       margin-left: 20px;
     }
   }
-`
+`;

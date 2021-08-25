@@ -1,35 +1,34 @@
-import React, { memo, VFC } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import React, { memo, VFC } from "react";
+import { Route, Switch } from "react-router-dom";
 
-import { Page404 } from '../components/pages/Page404'
-import { PageBasicInfo } from '../components/pages/PageBasicInfo'
-import { PageConsultation } from '../components/pages/PageConsultation'
-import { PageQuestion } from '../components/pages/PageQuestion'
-import { PageResult } from '../components/pages/PageResult'
+import { Page404 } from "../components/pages/Page404";
+import { PageBasicInfo } from "../components/pages/PageBasicInfo";
+import { PageConsultation } from "../components/pages/PageConsultation";
+import { PageQuestion } from "../components/pages/PageQuestion";
+import { PageResult } from "../components/pages/PageResult";
 
-
-export const Router : VFC = memo(() => {
+export const Router: VFC = memo(() => {
   return (
     <Switch>
       <Route exact path="/">
-        <PageBasicInfo/>
+        <PageBasicInfo />
       </Route>
 
       <Route path="/question">
-        <PageQuestion/>
+        <PageQuestion />
       </Route>
 
       <Route path="/consultation">
-        <PageConsultation/>
+        <PageConsultation />
       </Route>
 
       <Route path="/result">
-        <PageResult/>
+        <PageResult />
       </Route>
 
       <Route path="*">
-        <Page404/>
+        <Page404 />
       </Route>
     </Switch>
-  )
+  );
 });
